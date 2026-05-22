@@ -21,7 +21,7 @@ twin/
   calcom.py             # Cal.com API client (v2)
   llm.py                # OpenAI client + tool-call loop
   convolog.py           # Conversation logger (JSONL)
-kb/
+knowledge_base/
   about_jean.md         # Knowledge base — drop more .md files here
 logs/
   conversations.jsonl   # One JSON object per turn (gitignored)
@@ -57,13 +57,13 @@ requirements.txt
    python app.py
    ```
 
-   First launch builds the Chroma index from `kb/*.md`. Subsequent launches reuse the persisted DB.
+   First launch builds the Chroma index from `knowledge_base/*.md`. Subsequent launches reuse the persisted DB.
 
    Open http://localhost:7860 in a browser.
 
 ## Updating the knowledge base
 
-Drop new `.md` files into `kb/`. The bot chunks **by paragraph** (split on blank lines), so structure your docs with clear paragraph breaks — each paragraph becomes one retrievable chunk.
+Drop new `.md` files into `knowledge_base/`. The bot chunks **by paragraph** (split on blank lines), so structure your docs with clear paragraph breaks — each paragraph becomes one retrievable chunk.
 
 To force a rebuild of the index (after editing existing docs):
 ```bash

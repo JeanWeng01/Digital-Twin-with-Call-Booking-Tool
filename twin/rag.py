@@ -9,7 +9,7 @@ from openai import OpenAI
 EMBED_MODEL = "text-embedding-3-small"
 CHROMA_PATH = "./chroma_db"
 COLLECTION_NAME = "jean_kb"
-KB_DIR = Path("./kb")
+KB_DIR = Path("./knowledge_base")
 
 # If any single paragraph is longer than this, split it on sentence boundaries.
 MAX_PARAGRAPH_CHARS = 1500
@@ -102,7 +102,7 @@ def get_collection():
 
 
 def build_index(force_rebuild: bool = False) -> int:
-    """Read all .md files in kb/, chunk them by paragraph, embed, store in Chroma.
+    """Read all .md files in knowledge_base/, chunk them by paragraph, embed, store in Chroma.
     Returns number of chunks indexed. Skips rebuild if collection already populated
     and force_rebuild is False."""
     collection = get_collection()

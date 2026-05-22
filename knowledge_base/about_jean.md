@@ -24,4 +24,4 @@ The easiest way to talk to Jean is to book a 15-minute intro call through this c
 
 ---
 
-*This is a placeholder bio. Replace this file with your real content — the bot will rebuild its knowledge base from any .md files dropped into the `kb/` folder on next launch (delete `chroma_db_twin/` to force a rebuild).*
+*This is a placeholder bio. Replace this file with your real content — the bot will rebuild its knowledge base from any .md files dropped into the `knowledge_base/` folder on next launch (delete `chroma_db/` to force a rebuild).*

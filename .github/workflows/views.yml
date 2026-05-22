@@ -1,0 +1,88 @@
+name: GitHub View Count Update Everyday
+
+on:
+  schedule:
+    - cron: "30 0 * * *"
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: gh login
+        run: echo "${{ secrets.SECRET_TOKEN }}" | gh auth login --with-token
+
+      - name: parse latest view count
+        run: |
+          curl --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            https://api.github.com/repos/${{ github.repository }}/traffic/views \
+            > views.json
+
+      - name: create gist and download previous count
+        id: set_id
+        run: |
+          if gh secret list | grep -q "VIEWS_GIST_ID"
+          then
+              echo "VIEWS_GIST_ID found"
+              echo "GIST=${{ secrets.VIEWS_GIST_ID }}" >> $GITHUB_OUTPUT
+              curl https://gist.githubusercontent.com/${{ github.actor }}/${{ secrets.VIEWS_GIST_ID }}/raw/views.json > views_before.json
+              if cat views_before.json | grep '404: Not Found'; then
+                echo "VIEWS_GIST_ID not valid anymore. Creating another gist..."
+                gist_id=$(gh gist create views.json | awk -F / '{print $NF}')
+                echo $gist_id | gh secret set VIEWS_GIST_ID
+                echo "GIST=$gist_id" >> $GITHUB_OUTPUT
+                cp views.json views_before.json
+                git rm --ignore-unmatch VIEWS.md
+              fi
+          else
+              echo "VIEWS_GIST_ID not found. Creating a gist..."
+              gist_id=$(gh gist create views.json | awk -F / '{print $NF}')
+              echo $gist_id | gh secret set VIEWS_GIST_ID
+              echo "GIST=$gist_id" >> $GITHUB_OUTPUT
+              cp views.json views_before.json
+          fi
+
+      - name: update views.json
+        run: python3 .github/scripts/views_accumulate.py
+
+      - name: Update gist with latest count
+        run: |
+          content=$(sed -e 's/\\/\\\\/g' -e 's/\t/\\t/g' -e 's/\"/\\"/g' -e 's/\r//g' "views.json" | sed -E ':a;N;$!ba;s/\r{0,1}\n/\\n/g')
+          echo '{"description": "${{ github.repository }} view statistics", "files": {"views.json": {"content": "'"$content"'"}}}' > post_views.json
+          curl -s -X PATCH \
+            --user "${{ github.actor }}:${{ secrets.SECRET_TOKEN }}" \
+            -H "Content-Type: application/json" \
+            -d @post_views.json https://api.github.com/gists/${{ steps.set_id.outputs.GIST }} > /dev/null 2>&1
+
+          if [ ! -f VIEWS.md ]; then
+            shields="https://img.shields.io/badge/dynamic/json?color=blue&label=Views&query=count&url="
+            url="https://gist.githubusercontent.com/${{ github.actor }}/${{ steps.set_id.outputs.GIST }}/raw/views.json"
+            repo="https://github.com/${{ github.repository }}"
+            echo '' > VIEWS.md
+            echo '
+            **Markdown**
+
+            ```markdown' >> VIEWS.md
+            echo "[![GitHub Views]($shields$url&logo=github)]($repo)" >> VIEWS.md
+            echo '
+            ```
+
+            **HTML**
+            ```html' >> VIEWS.md
+            echo "<a href='$repo'><img alt='GitHub Views' src='$shields$url&logo=github'></a>" >> VIEWS.md
+            echo '```' >> VIEWS.md
+
+            git add VIEWS.md
+            git config --global user.name "GitHub Action"
+            git config --global user.email "action@github.com"
+            git commit -m "create view count badge"
+          fi
+
+      - name: Push
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}

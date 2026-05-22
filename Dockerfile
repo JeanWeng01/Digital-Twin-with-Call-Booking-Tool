@@ -11,7 +11,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY app.py .
 COPY twin/ ./twin/
-COPY kb/ ./kb/
+COPY knowledge_base/ ./knowledge_base/
 
 ENV PORT=7860
 EXPOSE 7860
