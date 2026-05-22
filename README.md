@@ -1,3 +1,8 @@
+[![GitHub Views](https://img.shields.io/badge/dynamic/json?color=blue&label=Views&query=count&url=https://gist.githubusercontent.com/JeanWeng01/8691f50e3354ad3960be6bf26ac30933/raw/views.json&logo=github)](https://github.com/JeanWeng01/Digital-Twin-with-Call-Booking-Tool)
+
+[![GitHub Clones](https://img.shields.io/badge/dynamic/json?color=success&label=Clone&query=count&url=https://gist.githubusercontent.com/JeanWeng01/31fdbae3181046e7bf32defc5df01a78/raw/clone.json&logo=github)](https://github.com/MShawon/github-clone-count-badge)
+
+
 # Jean's Digital Twin
 
 A Gradio chatbot that represents Jean Weng. Answers questions about her work in AI engineering (RAG over a small knowledge base) and books 15-minute intro calls onto her Cal.com calendar via Claude tool use.
