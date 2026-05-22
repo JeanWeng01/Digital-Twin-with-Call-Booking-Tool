@@ -1,0 +1,34 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(jupyter kernelspec *)",
+      "Bash(dir \"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\hello-world.ipynb\")",
+      "Bash(powershell -Command \"Get-Item 'c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\hello-world.ipynb' | Select-Object Name, Length, LastWriteTime\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -c \"import sys; print\\('python:', sys.version\\); import openai, dotenv; print\\('openai:', openai.__version__\\); print\\('dotenv: ok'\\)\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -m jupyter --version)",
+      "Bash('c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe' -c ' *)",
+      "Bash(findstr /v \"Exception ignored Traceback File line TypeError\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -c \"import json; nb = json.load\\(open\\(r'c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\hello-world.ipynb'\\)\\); print\\('cells:', len\\(nb['cells']\\), 'kernel:', nb['metadata']['kernelspec']['name'], 'nbformat:', nb['nbformat']\\)\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -m pip list)",
+      "Bash(findstr /i \"ipykernel pyzmq jupyter-client tornado traitlets\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -m pip install \"ipykernel==6.29.5\" \"ipython==8.30.0\")",
+      "Bash(\"c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\ai_env\\\\Scripts\\\\python.exe\" -c \"import gradio; print\\('gradio:', gradio.__version__\\); import inspect; print\\('ChatInterface params:', list\\(inspect.signature\\(gradio.ChatInterface.__init__\\).parameters.keys\\(\\)\\)\\)\")",
+      "Bash(python -c \"import json; nb=json.load\\(open\\(r'c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\rag.ipynb'\\)\\); [print\\(i, c['cell_type'], c.get\\('id','?'\\), repr\\(''.join\\(c['source']\\)[:60]\\)\\) for i,c in enumerate\\(nb['cells']\\)]\")",
+      "Bash(python -c \"import json; nb=json.load\\(open\\(r'c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\rag.ipynb', encoding='utf-8'\\)\\); [print\\(i, c['cell_type'], c.get\\('id','?'\\), repr\\(''.join\\(c['source']\\)[:60]\\)\\) for i,c in enumerate\\(nb['cells']\\)]\")",
+      "Bash(python -c \"import json; nb=json.load\\(open\\(r'c:\\\\Users\\\\jean\\\\Projects\\\\SDS_digital_twin\\\\rag.ipynb', encoding='utf-8'\\)\\); [print\\(i, c['cell_type'], c.get\\('id','?'\\), repr\\(''.join\\(c['source']\\)[:80]\\)\\) for i,c in enumerate\\(nb['cells']\\)]\")",
+      "Bash(cd c:/Users/jean/Projects/SDS_digital_twin && mkdir -p _notebooks_scratch twin kb && mv *.ipynb _notebooks_scratch/ && rm -rf chroma_db chroma_db3 ai-engineering && ls -la | grep -v ai_env)",
+      "Bash(./ai_env/Scripts/python.exe -c \"from twin import rag, tools, llm, calcom, prompts; print\\('imports OK'\\)\")",
+      "Bash(./ai_env/Scripts/python.exe -c ' *)",
+      "WebFetch(domain:cal.com)",
+      "Skill(claude-api)",
+      "Skill(claude-api:*)",
+      "Bash(./ai_env/Scripts/pip.exe install *)",
+      "Bash(./ai_env/Scripts/python.exe -X utf8 -c ' *)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)"
+    ],
+    "additionalDirectories": [
+      "c:\\Users\\jean\\Projects\\SDS_digital_twin"
+    ]
+  }
+}

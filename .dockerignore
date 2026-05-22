@@ -1,0 +1,14 @@
+.env
+.venv
+ai_env/
+_notebooks_scratch/
+chroma_db/
+chroma_db3/
+logs/
+__pycache__/
+*.pyc
+.git/
+.gitignore
+.claude/
+.ipynb_checkpoints/
+README.md
