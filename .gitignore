@@ -1,5 +1,6 @@
 .env
 .venv
+.claude
 ai_env/
 _notebooks_scratch/
 chroma_db/
